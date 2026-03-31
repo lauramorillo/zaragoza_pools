@@ -1,38 +1,38 @@
 # Zaragoza Pools 🏊‍♂️📊
 
-Un proyecto para consultar la afluencia y el aforo en tiempo real e histórico de las piscinas municipales de Zaragoza. 
+A project to query the real-time and historical occupancy and capacity of the municipal public pools in Zaragoza.
 
-Este sistema extrae automáticamente (mediante *scraping*) los datos de ocupación y los expone en un panel visual (Dashboard) que permite a los usuarios planificar mejor su visita comparando la afluencia de los recintos.
+This system automatically extracts (via *scraping*) occupancy data and exposes it on a visual Dashboard, allowing users to better plan their visit by comparing the crowd levels across different facilities.
 
-## 🚀 Características
+## 🚀 Features
 
-- **Scraper Automático**: Una Cloud Function programada que extrae la capacidad periódicamente.
-- **Almacenamiento Histórico**: Guarda las lecturas en Cloud Firestore (NoSQL).
-- **Dashboard Visual**: Interfaz web rápida renderizada desde el servidor con Jinja2, TailwindCSS y gráficos interactivos usando Chart.js.
-- **Infraestructura como Código (IaC)**: Despliegue 100% automatizado mediante Terraform y Google Cloud Platform (GCP).
+- **Automated Scraper**: A scheduled Cloud Function that periodically extracts capacity data.
+- **Historical Storage**: Saves readings in Cloud Firestore (NoSQL) for historical analysis.
+- **Visual Dashboard**: Fast, server-side rendered web interface using Jinja2, TailwindCSS, and interactive charts via Chart.js.
+- **Infrastructure as Code (IaC)**: 100% automated deployment using Terraform and Google Cloud Platform (GCP).
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
-El proyecto está dividido principalmente en dos carpetas para separar el código de la infraestructura:
+The project is divided into two main folders to separate application code from infrastructure:
 
-- `src/`: Contiene el código fuente de la aplicación en Python.
-  - `scraper.py`: Lógica para la extracción de datos.
-  - `dashboard.py`: Lógica del servidor web para visualizar los datos.
-  - `templates/`: Plantillas HTML (Jinja2) del panel visual.
-  - `requirements.txt`: Dependencias de Python necesarias.
-- `terraform/`: Definiciones de infraestructura de Terraform para desplegar los recursos (funciones, base de datos, scheduler) en GCP de forma reproducible.
-- `ARCHITECTURE.md`: Documento detallado sobre decisiones técnicas y arquitectura.
+- `src/`: Contains the Python source code for the application.
+  - `scraper.py`: Logic for data extraction.
+  - `dashboard.py`: Web server logic to visualize the data.
+  - `templates/`: HTML templates (Jinja2) for the visual dashboard.
+  - `requirements.txt`: Required Python dependencies.
+- `terraform/`: Terraform infrastructure definitions to reproducibly deploy resources (functions, database, scheduler) on GCP.
+- `ARCHITECTURE.md`: Detailed document regarding technical decisions and architecture.
 
-## 🛠 Instalación y Despliegue
+## 🛠 Setup and Deployment
 
-### Requisitos Previos
-1. Tener cuenta en Google Cloud Platform (GCP) con un proyecto creado.
-2. Instalar y configurar [Google Cloud SDK (gcloud)](https://cloud.google.com/sdk/docs/install).
-3. Instalar [Terraform](https://developer.hashicorp.com/terraform/downloads).
+### Prerequisites
+1. Have a Google Cloud Platform (GCP) account with a created project.
+2. Install and configure the [Google Cloud SDK (gcloud)](https://cloud.google.com/sdk/docs/install).
+3. Install [Terraform](https://developer.hashicorp.com/terraform/downloads).
 
-### Despliegue
+### Deployment
 
-Toda la infraestructura se despliega con Terraform de manera automática. El código de la carpeta `src/` será empaquetado y subido a GCP para correr como Cloud Functions de 2ª Generación.
+The entire infrastructure is automatically deployed using Terraform. The code inside the `src/` folder will be packaged and uploaded to GCP to run as 2nd Generation Cloud Functions.
 
 ```bash
 cd terraform
@@ -41,14 +41,14 @@ terraform plan
 terraform apply
 ```
 
-*(Asegúrate de configurar las variables necesarias como tu `project_id` de Google Cloud y establecer un bucket de estado si aplicas el despliegue a un entorno remoto).*
+*(Make sure to configure necessary variables like your Google Cloud `project_id` and set up a state bucket if you deploy to a remote environment).*
 
-## 💻 Desarrollo Local
+## 💻 Local Development
 
-Para trabajar en el código de Python localmente:
+To work on the Python code locally:
 
 ```bash
-# Crear entorno virtual e instalar dependencias
+# Create virtual environment and install dependencies
 python3 -m venv venv
 source venv/bin/activate
 pip install -r src/requirements.txt
