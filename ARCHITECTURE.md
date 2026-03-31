@@ -9,7 +9,7 @@ Provide an accessible web dashboard to query real-time and historical capacity o
 
 The system is composed of the following main components deployed on Google Cloud Platform (GCP):
 
-1. **Scraper (`scraper.py`)**: 
+1. **Scraper (`src/scraper.py`)**: 
    - Automated scheduled task that extracts capacity information from the municipal website.
    - **Compute**: Cloud Functions (Python).
    - **Orchestration**: Cloud Scheduler (Periodic execution, e.g., every 15 mins).
@@ -18,7 +18,7 @@ The system is composed of the following main components deployed on Google Cloud
    - Stores historical occupancy readings of all pools using documents. 
    - Advantage: Flexible NoSQL model, generous free tier, and easy integration with Cloud Functions.
 
-3. **Dashboard / Frontend (`dashboard.py` + `templates/index.html`)**:
+3. **Dashboard / Frontend (`src/dashboard.py` + `src/templates/index.html`)**:
    - Lightweight service responsible for reading from Firestore and rendering a responsive web page.
    - **Backend**: Cloud Functions (Python) using `functions_framework.http`.
    - **Template Engine**: Jinja2.
