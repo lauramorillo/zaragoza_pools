@@ -1,0 +1,7 @@
+requests
+beautifulsoup4
+functions-framework==3.*
+google-cloud-firestore==2.*
+jinja2
+google-cloud-firestore
+pytz
