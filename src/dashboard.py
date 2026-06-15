@@ -37,7 +37,19 @@ def render_dashboard(request):
         for doc in latest_readings_ref:
             data = doc.to_dict()
             name = data.get('name')
+            if not name:
+                continue
+                
+            # Filter to keep only the requested indoor pools
+            name_upper = name.upper()
+            is_alberto_maestro = "CDM ALBERTO MAESTRO" in name_upper and "VERANO" not in name_upper
+            is_jose_garces = "CDM JOSE GARCES" in name_upper
+            is_palafox = "CDM PALAFOX" in name_upper
+            is_siglo_xxi = "CDM SIGLO XXI" in name_upper
             
+            if not (is_alberto_maestro or is_jose_garces or is_palafox or is_siglo_xxi):
+                continue
+                
             # Save only if we haven't seen it, as they are sorted DESC, the first is the most recent
             if name not in latest_by_pool:
                 capacity = data.get('capacity', 0)
@@ -89,6 +101,16 @@ def render_dashboard(request):
             current = data.get('current_occupation')
             
             if not name or current is None or not ts:
+                continue
+                
+            # Filter to keep only the requested indoor pools
+            name_upper = name.upper()
+            is_alberto_maestro = "CDM ALBERTO MAESTRO" in name_upper and "VERANO" not in name_upper
+            is_jose_garces = "CDM JOSE GARCES" in name_upper
+            is_palafox = "CDM PALAFOX" in name_upper
+            is_siglo_xxi = "CDM SIGLO XXI" in name_upper
+            
+            if not (is_alberto_maestro or is_jose_garces or is_palafox or is_siglo_xxi):
                 continue
                 
             # Convert timestamp to Madrid time if it's naive or from another zone

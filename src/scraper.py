@@ -46,6 +46,17 @@ def main(request):
                 
             # Data extraction
             name = cells[0].get_text(strip=True)
+            
+            # Filter to keep only the requested indoor pools
+            name_upper = name.upper()
+            is_alberto_maestro = "CDM ALBERTO MAESTRO" in name_upper and "VERANO" not in name_upper
+            is_jose_garces = "CDM JOSE GARCES" in name_upper
+            is_palafox = "CDM PALAFOX" in name_upper
+            is_siglo_xxi = "CDM SIGLO XXI" in name_upper
+            
+            if not (is_alberto_maestro or is_jose_garces or is_palafox or is_siglo_xxi):
+                continue
+                
             capacity_text = cells[3].get_text(strip=True)
             current_text = cells[4].get_text(strip=True)
             status_text = cells[5].get_text(strip=True) # Ex: "83 out of 120"
